@@ -122,8 +122,6 @@ function* updateCard(action) {
     }
   }
 
-  console.log("=====++ ", cards);
-
   try {
     // trigger request action
     yield put(updateCardRoutine.request());
