@@ -1,6 +1,6 @@
 import { combineReducers } from "redux-immutable";
 
-import cardsReducer from "accessors/cards/reducer";
+import cardsReducer from "accessors/cards-accessor/reducer";
 /**
  * Create root reducer, containing
  * all features of the application

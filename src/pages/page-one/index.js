@@ -2,7 +2,7 @@ import { Spin } from "antd";
 import { connect } from "react-redux";
 import React from "react";
 import { toast } from "react-toastify";
-import getCardsRoutine from "accessors/cards/routines";
+import getCardsRoutine from "accessors/cards-accessor/routines";
 import Topbar from "components/topbar";
 
 const PageOne = (props) => {
