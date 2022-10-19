@@ -8,7 +8,7 @@ import filterArrayByField from "utils/filterArrayByField";
 const Main = (props) => {
   const { cards, updateCard, pageName } = props;
 
-  const dashboardCards = filterArrayByField(cards, "pageName", pageName);
+  const pageCards = filterArrayByField(cards, "pageName", pageName);
 
   const setUpdateCard = (id) => {
     updateCard(cards, id, pageName);
@@ -17,11 +17,13 @@ const Main = (props) => {
     <>
       <Topbar />
       <div className="row">
-        {dashboardCards?.map((card) => {
+        {pageCards?.map((card) => {
           return (
             <Cards
+            selectedPage={pageName}
               id={card.id}
               name={card.name}
+              page={card.pageName}
               isPinned={card.isPinned}
               color={card.color}
               updateCard={setUpdateCard}

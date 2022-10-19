@@ -4,7 +4,7 @@ import Main from "components/main";
 const PageOne = () => {
   return (
     <>
-      <Main pageName="page-one" />
+      <Main pageName="Page 1" />
     </>
   );
 };

@@ -14,7 +14,8 @@ function* getCards() {
       cards: [],
     },
     {
-      pageName: "page-one",
+      pageName: "Page 1",
+      pageNumber: "1",
       cards: [
         {
           id: "1",
@@ -43,28 +44,12 @@ function* getCards() {
       ],
     },
     {
-      pageName: "page-two",
+      pageName: "Page 2",
+      pageNumber: "2",
       cards: [
-        {
-          name: "Item 1",
-          color: "red",
-          isPinned: false,
-        },
-        {
-          name: "Item 2",
-          color: "blue",
-          isPinned: false,
-        },
-        {
-          name: "Item 3",
-          color: "green",
-          isPinned: false,
-        },
-        {
-          name: "Item 4",
-          color: "purple",
-          isPinned: false,
-        },
+        { id: "1", name: "Item 1", color: "pink", isPinned: false },
+        { id: "2", name: "Item 2", color: "yellow", isPinned: false },
+        { id: "3", name: "Item 3", color: "gray", isPinned: false },
       ],
     },
   ];
@@ -95,6 +80,7 @@ function* updateCard(action) {
         if (cardData[c].id === id) {
           isPinned = cards[i].cards[c].isPinned ? false : true;
           cards[i].cards[c].isPinned = isPinned;
+          cards[i].cards[c].pageName = pageName;
 
           pinnedCard = cards[i].cards[c];
 

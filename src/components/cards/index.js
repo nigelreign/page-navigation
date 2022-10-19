@@ -1,7 +1,7 @@
 import React from "react";
 
 const Cards = (props) => {
-  const { name, isPinned, color, id, updateCard } = props;
+  const { name, isPinned, color, id, updateCard, page, selectedPage } = props;
   return (
     <>
       <div
@@ -15,7 +15,13 @@ const Cards = (props) => {
             <h4>
               <b>{name}</b>
             </h4>
-            <p>{isPinned ? "(Pinned)" : ""}</p>
+            <p>
+              {isPinned && selectedPage === "dashboard"
+                ? page
+                : isPinned
+                ? "(Pinned)"
+                : ""}
+            </p>
           </div>
         </div>
       </div>
