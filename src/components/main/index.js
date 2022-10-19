@@ -8,11 +8,6 @@ import filterArrayByField from "utils/filterArrayByField";
 const Main = (props) => {
   const { cards, updateCard, pageName } = props;
 
-  /**
-   * ========================================================
-   * GET CARDS FROM REDUX STORE AND FILTER USING THE PAGE NAME
-   * =========================================================
-   */
   const pageCards = filterArrayByField(cards, "pageName", pageName);
 
   const setUpdateCard = (id) => {
@@ -74,33 +69,19 @@ const Main = (props) => {
   );
 };
 
-/**
- * set proptypes
- */
 Main.propTypes = {
   cards: [],
 };
 
-/**
- *
- * @param {*} state
- * @returns cards from redux store
- */
 function mapStateToProps(state) {
   return {
     cards: state.getIn(["cards", "cards"]),
+    loading: state.getIn(["cards", "loading"]),
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    /**
-     *
-     * @param {*} cards
-     * @param {*} id
-     * @param {*} pageName
-     * @returns alert: card pinned successfully
-     */
     updateCard: (cards, id, pageName) =>
       dispatch(
         updateCardRoutine.trigger({
