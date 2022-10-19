@@ -1,24 +1,14 @@
-# Getting Started with Create React App
+# Dashboard with the ability to pin items to it from 2 other pages.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
+## How to run the project
 
 In the project directory, you can run:
-
+### `npm install`
 ### `npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-Due to conflicting styles, this page will now give a good representation of what the actual build page will look like
+## APP Demo
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![Screencast-2022-10-19-171431](https://user-images.githubusercontent.com/37867005/196733915-d0afd0d9-629b-4cde-96ed-e774206c4fbf.gif)
