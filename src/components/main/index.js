@@ -13,6 +13,12 @@ const Main = (props) => {
   const setUpdateCard = (id) => {
     updateCard(cards, id, pageName);
   };
+
+  if (pageName === "dashboard") {
+    pageCards?.sort((a, b) => {
+      return a.pageNumber - b.pageNumber;
+    });
+  }
   return (
     <>
       <Topbar />
@@ -20,7 +26,7 @@ const Main = (props) => {
         {pageCards?.map((card) => {
           return (
             <Cards
-            selectedPage={pageName}
+              selectedPage={pageName}
               id={card.id}
               name={card.name}
               page={card.pageName}

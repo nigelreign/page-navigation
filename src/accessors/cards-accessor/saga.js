@@ -81,6 +81,7 @@ function* updateCard(action) {
           isPinned = cards[i].cards[c].isPinned ? false : true;
           cards[i].cards[c].isPinned = isPinned;
           cards[i].cards[c].pageName = pageName;
+          cards[i].cards[c].pageNumber = cards[i]?.pageNumber;
 
           pinnedCard = cards[i].cards[c];
 
