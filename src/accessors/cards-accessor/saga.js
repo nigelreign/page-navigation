@@ -18,25 +18,25 @@ function* getCards() {
       pageNumber: "1",
       cards: [
         {
-          id: "1",
+          id: "page-1-item-1",
           name: "Item 1",
           color: "red",
           isPinned: false,
         },
         {
-          id: "2",
+          id: "page-1-item-2",
           name: "Item 2",
           color: "blue",
           isPinned: false,
         },
         {
-          id: "3",
+          id: "page-1-item-3",
           name: "Item 3",
           color: "green",
           isPinned: false,
         },
         {
-          id: "4",
+          id: "page-1-item-4",
           name: "Item 4",
           color: "purple",
           isPinned: false,
@@ -47,9 +47,24 @@ function* getCards() {
       pageName: "Page 2",
       pageNumber: "2",
       cards: [
-        { id: "1", name: "Item 1", color: "pink", isPinned: false },
-        { id: "2", name: "Item 2", color: "yellow", isPinned: false },
-        { id: "3", name: "Item 3", color: "gray", isPinned: false },
+        {
+          id: "page-2-item-1",
+          name: "Item 1",
+          color: "pink",
+          isPinned: false,
+        },
+        {
+          id: "page-2-item-2",
+          name: "Item 2",
+          color: "yellow",
+          isPinned: false,
+        },
+        {
+          id: "page-2-item-3",
+          name: "Item 3",
+          color: "gray",
+          isPinned: false,
+        },
       ],
     },
   ];
@@ -71,6 +86,9 @@ function* cardsSaga() {
 
 function* updateCard(action) {
   const { cards, id, pageName } = action.payload;
+
+  console.log("----", id);
+  console.log("----", cards);
   let isPinned = false;
   let pinnedCard;
   for (let i = 0; i < cards?.length; i++) {
@@ -102,7 +120,7 @@ function* updateCard(action) {
         const cardData = cards[i]?.cards;
         for (let c = 0; c < cardData?.length; c++) {
           if (cardData[c].id === id) {
-            cardData.splice(i, 1);
+            cards[i]?.cards.splice(c, 1);
           }
         }
       }
