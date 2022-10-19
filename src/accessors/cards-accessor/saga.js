@@ -86,15 +86,18 @@ function* cardsSaga() {
 
 function* updateCard(action) {
   const { cards, id, pageName } = action.payload;
-
+  let isPinned = false;
+  let pinnedCard;
   for (let i = 0; i < cards?.length; i++) {
     if (cards[i]?.pageName === pageName) {
       const cardData = cards[i]?.cards;
       for (let c = 0; c < cardData?.length; c++) {
         if (cardData[c].id === id) {
-          const isPinned = cards[i].cards[c].isPinned ? false : true;
+          isPinned = cards[i].cards[c].isPinned ? false : true;
           cards[i].cards[c].isPinned = isPinned;
-          
+
+          pinnedCard = cards[i].cards[c];
+
           const message = `Card ${
             isPinned ? "Pinned" : "Unpinned"
           } successfully`;
@@ -103,6 +106,23 @@ function* updateCard(action) {
       }
     }
   }
+
+  for (let i = 0; i < cards?.length; i++) {
+    if (cards[i]?.pageName === "dashboard") {
+      if (isPinned) {
+        cards[i].cards.push(pinnedCard);
+      } else {
+        const cardData = cards[i]?.cards;
+        for (let c = 0; c < cardData?.length; c++) {
+          if (cardData[c].id === id) {
+            cardData.splice(i, 1);
+          }
+        }
+      }
+    }
+  }
+
+  console.log("=====++ ", cards);
 
   try {
     // trigger request action
