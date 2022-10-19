@@ -1,6 +1,7 @@
 import { put, takeEvery, takeLatest } from "redux-saga/effects";
 // eslint-disable-next-line import/no-unresolved
 import getCardsRoutine, { updateCardRoutine } from "./routines";
+import { toast } from "react-toastify";
 
 /**
  * ============================================================
@@ -91,13 +92,17 @@ function* updateCard(action) {
       const cardData = cards[i]?.cards;
       for (let c = 0; c < cardData?.length; c++) {
         if (cardData[c].id === id) {
-          cards[i].cards[c].isPinned = true
+          const isPinned = cards[i].cards[c].isPinned ? false : true;
+          cards[i].cards[c].isPinned = isPinned;
+          
+          const message = `Card ${
+            isPinned ? "Pinned" : "Unpinned"
+          } successfully`;
+          toast.success(message);
         }
       }
     }
   }
-
-  console.log("---", cards);
 
   try {
     // trigger request action

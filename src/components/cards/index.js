@@ -5,12 +5,12 @@ const Cards = (props) => {
   return (
     <>
       <div
-        class="col-md-2"
+        className="col-md-2"
         onClick={() => {
           updateCard(id);
         }}
       >
-        <div class="card" style={{ backgroundColor: color }}>
+        <div className="card" style={{ backgroundColor: color }}>
           <div class="container">
             <h4>
               <b>{name}</b>

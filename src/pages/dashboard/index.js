@@ -1,7 +1,6 @@
 import { Spin } from "antd";
 import { connect } from "react-redux";
 import React from "react";
-import { toast } from "react-toastify";
 import {
   updateCardRoutine,
 } from "accessors/cards-accessor/routines";
@@ -28,7 +27,7 @@ const Dashboard = (props) => {
             <Cards
               id={card.id}
               name={card.name}
-              page={card.isPinned}
+              isPinned={card.isPinned}
               color={card.color}
               updateCard={setUpdateCard}
             />
