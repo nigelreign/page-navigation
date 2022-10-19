@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Dashboard from "pages/dashboard";
 import PageOne from "pages/page-one";
+import PageTwo from "pages/page-two";
 
 import AccessorContainer from "accessors/container";
 
@@ -22,6 +23,7 @@ const routes = () => (
       <Switch>
         <Route exact path={ROOT_PATH} component={Dashboard} />
         <Route exact path={PATHS.pageOne} component={PageOne} />
+        <Route exact path={PATHS.pageTwo} component={PageTwo} />
       </Switch>
     </Router>
   </>
