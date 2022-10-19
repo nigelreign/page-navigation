@@ -1,6 +1,5 @@
 const filterArrayByField = (array, field, value) => {
-  console.log("array", array);
-  for (let i = 0; i <= array?.length; i++) {
+  for (let i = 0; i < array?.length; i++) {
     if (array[i]?.[field] === value) {
       return array[i]?.cards;
     }

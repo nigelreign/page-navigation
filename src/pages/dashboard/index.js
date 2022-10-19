@@ -1,8 +1,8 @@
 import { Spin } from "antd";
 import { connect } from "react-redux";
-import React, { useEffect } from "react";
+import React from "react";
 import { toast } from "react-toastify";
-import getCardsRoutine, {
+import {
   updateCardRoutine,
 } from "accessors/cards-accessor/routines";
 import Topbar from "components/topbar";
@@ -10,18 +10,15 @@ import Cards from "components/cards";
 import filterArrayByField from "utils/filterArrayByField";
 
 const Dashboard = (props) => {
-  const { cards, getCards, updateCard } = props;
+  const { cards, updateCard } = props;
 
-  useEffect(() => {
-    getCards();
-  }, [getCards]);
+  const pageName = "page-one";
 
-  const dashboardCards = filterArrayByField(cards, "pageName", "page-one");
+  const dashboardCards = filterArrayByField(cards, "pageName", pageName);
 
-  const setUpdateCard = (id) =>{
-    console.log("--cliekc")
-    updateCard(cards, id)
-  }
+  const setUpdateCard = (id) => {
+    updateCard(cards, id, pageName);
+  };
   return (
     <>
       <Topbar />
@@ -29,6 +26,7 @@ const Dashboard = (props) => {
         {dashboardCards?.map((card) => {
           return (
             <Cards
+              id={card.id}
               name={card.name}
               page={card.isPinned}
               color={card.color}
@@ -54,12 +52,12 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    getCards: () => dispatch(getCardsRoutine.trigger({})),
-    updateCard: (cards, id) =>
+    updateCard: (cards, id, pageName) =>
       dispatch(
         updateCardRoutine.trigger({
           id,
           cards,
+          pageName,
         })
       ),
   };

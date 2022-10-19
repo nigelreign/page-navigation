@@ -1,6 +1,6 @@
 import { put, takeEvery, takeLatest } from "redux-saga/effects";
 // eslint-disable-next-line import/no-unresolved
-import getCardsRoutine, {updateCardRoutine} from "./routines";
+import getCardsRoutine, { updateCardRoutine } from "./routines";
 
 /**
  * ============================================================
@@ -84,29 +84,26 @@ function* cardsSaga() {
 }
 
 function* updateCard(action) {
-  console.log('=====**')
-  const { productID, cart, quantity, price } = action.payload;
+  const { cards, id, pageName } = action.payload;
 
-  if (cart) {
-    var search = cart.filter((obj) => obj.product_id === productID);
-    if (search.length > 0) {
-      search[0].quantity = search[0].quantity - quantity;
-      search[0].price = search[0].price - price;
-    }
-
-    for (var i = 0; i < cart.length; i++) {
-      if (cart[i].quantity === 0) {
-        cart.splice(i, 1);
+  for (let i = 0; i < cards?.length; i++) {
+    if (cards[i]?.pageName === pageName) {
+      const cardData = cards[i]?.cards;
+      for (let c = 0; c < cardData?.length; c++) {
+        if (cardData[c].id === id) {
+          cards[i].cards[c].isPinned = true
+        }
       }
     }
   }
 
+  console.log("---", cards);
 
   try {
     // trigger request action
     yield put(updateCardRoutine.request());
 
-    yield put(updateCardRoutine.success(cart));
+    yield put(updateCardRoutine.success(cards));
   } catch (error) {
     // if request failed
     yield put(updateCardRoutine.failure(error.message));
@@ -119,6 +116,5 @@ function* updateCard(action) {
 export function* updateCardSaga() {
   yield takeLatest([updateCardRoutine.TRIGGER], updateCard);
 }
-
 
 export default cardsSaga;
