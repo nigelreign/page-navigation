@@ -8,6 +8,11 @@ import filterArrayByField from "utils/filterArrayByField";
 const Main = (props) => {
   const { cards, updateCard, pageName } = props;
 
+  /**
+   * ========================================================
+   * GET CARDS FROM REDUX STORE AND FILTER USING THE PAGE NAME
+   * =========================================================
+   */
   const pageCards = filterArrayByField(cards, "pageName", pageName);
 
   const setUpdateCard = (id) => {
@@ -15,10 +20,11 @@ const Main = (props) => {
   };
 
   if (pageName === "dashboard") {
-    // pageCards?.sort((a, b) => {
-    //   return a.id - b.id;
-    // });
-
+    /**
+     * ============================
+     * SORT CARDS BY NAME
+     * ============================
+     */
     pageCards?.sort((a, b) => {
       let fa = a.name.toLowerCase(),
         fb = b.name.toLowerCase();
@@ -32,6 +38,12 @@ const Main = (props) => {
       return 0;
     });
 
+    /**
+     * ============================
+     * SORT CARDS BY PAGE NAME
+     * ============================
+     */
+
     pageCards?.sort((a, b) => {
       return a.pageNumber - b.pageNumber;
     });
@@ -40,6 +52,10 @@ const Main = (props) => {
     <>
       <Topbar />
       <div className="row">
+        {/**
+         * =========================================
+         * Render the selected page cards
+         */}
         {pageCards?.map((card) => {
           return (
             <Cards
@@ -58,19 +74,33 @@ const Main = (props) => {
   );
 };
 
+/**
+ * set proptypes
+ */
 Main.propTypes = {
   cards: [],
 };
 
+/**
+ *
+ * @param {*} state
+ * @returns cards from redux store
+ */
 function mapStateToProps(state) {
   return {
     cards: state.getIn(["cards", "cards"]),
-    loading: state.getIn(["cards", "loading"]),
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
+    /**
+     *
+     * @param {*} cards
+     * @param {*} id
+     * @param {*} pageName
+     * @returns alert: card pinned successfully
+     */
     updateCard: (cards, id, pageName) =>
       dispatch(
         updateCardRoutine.trigger({

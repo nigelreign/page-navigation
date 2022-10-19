@@ -8,6 +8,13 @@ import { toast } from "react-toastify";
  * @param {Get Cards}
  */
 function* getCards() {
+  /**
+   * ===============================================================
+   *
+   * Creates card array
+   *
+   * ================================================================
+   **/
   const cards = [
     {
       pageName: "dashboard",
@@ -69,6 +76,13 @@ function* getCards() {
     },
   ];
   try {
+    /**
+     * ===============================================================
+     *
+     * Pushes the card array to state
+     *
+     * ================================================================
+     **/
     yield put(getCardsRoutine.success(cards));
   } catch (error) {
     // if request failed
@@ -87,13 +101,22 @@ function* cardsSaga() {
 function* updateCard(action) {
   const { cards, id, pageName } = action.payload;
 
-  console.log("----", id);
-  console.log("----", cards);
   let isPinned = false;
   let pinnedCard;
+
+  /**
+   * ===============================================================
+   *
+   * Checks if the card is pinned or not
+   * Sets the card to pinned or unpinned based on the status of the card
+   * Appends the changed values to the cards array
+   *
+   * ================================================================
+   **/
   for (let i = 0; i < cards?.length; i++) {
     if (cards[i]?.pageName === pageName) {
       const cardData = cards[i]?.cards;
+
       for (let c = 0; c < cardData?.length; c++) {
         if (cardData[c].id === id) {
           isPinned = cards[i].cards[c].isPinned ? false : true;
@@ -112,6 +135,15 @@ function* updateCard(action) {
     }
   }
 
+  /**
+   * ===============================================================
+   *
+   * Checks if the card is pinned or not
+   * If card is pinned the card object will be pushed to the dashboard array
+   * If not the card will be removed from the dashboard array
+   *
+   * ================================================================
+   **/
   for (let i = 0; i < cards?.length; i++) {
     if (cards[i]?.pageName === "dashboard") {
       if (isPinned) {
@@ -131,10 +163,16 @@ function* updateCard(action) {
     // trigger request action
     yield put(updateCardRoutine.request());
 
+    /**
+     * ===============================================================
+     *
+     * Push the card back to state
+     * ================================================================
+     **/
     yield put(updateCardRoutine.success(cards));
   } catch (error) {
     // if request failed
-    yield put(updateCardRoutine.failure(error.message));
+    yield put(updateCardRoutine.failure("Failed to update the card"));
   } finally {
     // trigger fulfill action
     yield put(updateCardRoutine.fulfill());

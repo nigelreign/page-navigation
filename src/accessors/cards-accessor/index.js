@@ -6,6 +6,13 @@ import { connect } from "react-redux";
 
 const Cards = (props) => {
   useEffect(() => {
+    /**
+     * ===============================================================
+     *
+     * Gets card details from state
+     *
+     * ================================================================
+     **/
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const { getCards } = props;
     getCards();
